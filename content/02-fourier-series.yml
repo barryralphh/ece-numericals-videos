@@ -1,0 +1,57 @@
+title: 'Video 2: Fourier Series Coefficients - Quick Method'
+scenes:
+  - head: 'Question aisa dikhega'
+    viz: sine
+    freq: 3
+    say: 'आज Fourier series का सबसे आसान तरीका। जब signal sine और cosine का sum हो, तो integral की ज़रूरत ही नहीं! सवाल: x of t बराबर दो, plus cos two pi t by three, plus चार sin five pi t by three। Fundamental frequency और coefficients निकालो.'
+    lines:
+      - 'x(t) = 2 + cos(2πt/3) + 4 sin(5πt/3)'
+      - 'Find: ω0 and Fourier series coefficients ak'
+      - 'S|Sum of sin/cos hai? Integral mat karo, Euler use karo'
+  - head: 'Step 1: ω0 nikalo'
+    say: 'पहला step: ω0 निकालना। सारी frequencies को एक common unit का multiple बनाओ। दो pi बटा तीन, यानी दो गुणा pi बटा तीन। पाँच pi बटा तीन, यानी पाँच गुणा pi बटा तीन। दो और पाँच का GCD एक, तो ω0 बराबर pi बटा तीन, और period छह. Harmonic numbers k हैं दो और पाँच.'
+    lines:
+      - 'Frequencies: 2π/3 = 2 × (π/3) ,   5π/3 = 5 × (π/3)'
+      - 'F|ω0 = GCD(2, 5) × π/3 = π/3'
+      - 'T = 2π/ω0 = 6 ,   harmonics: k = 2 and k = 5'
+  - head: 'Step 2: Euler shortcut'
+    say: 'दूसरा step: दो शॉर्टकट याद कर लो। A cos of k omega zero t से, ak और a minus k, दोनों A बटा दो मिलते हैं। B sin of k omega zero t से, ak बराबर minus j B बटा दो, और a minus k बराबर plus j B बटा दो। बस, यही पूरा Fourier series है.'
+    lines:
+      - 'F|A cos(kω0t)  ->  ak = a-k = A/2'
+      - 'F|B sin(kω0t)  ->  ak = -jB/2 ,  a-k = +jB/2'
+      - 'S|Constant term = a0 directly (DC value)'
+  - head: 'Step 3: Fill karo'
+    say: 'अब भरते हैं। Constant दो, तो a zero बराबर दो। cos वाला, A एक, k दो, तो a दो और a minus दो, दोनों आधा। sin वाला, B चार, k पाँच, तो a पाँच बराबर minus j गुणा चार बटा दो, यानी minus दो j, और a minus पाँच बराबर plus दो j.'
+    lines:
+      - 'a0 = 2'
+      - 'cos term (A=1, k=2):  a2 = a-2 = 1/2'
+      - 'sin term (B=4, k=5):  a5 = -4j/2 = -2j'
+      - 'A|a0 = 2 ,  a±2 = 1/2 ,  a5 = -2j ,  a-5 = +2j'
+  - head: 'Magnitude and Phase plot'
+    viz: spectrum
+    bars:
+      - ['-5', 1.0]
+      - ['-2', 0.25]
+      - ['0', 1.0]
+      - ['2', 0.25]
+      - ['5', 1.0]
+    say: 'Magnitude plot बनाओ। k बराबर शून्य पर ऊँचाई दो, k बराबर plus minus दो पर आधा, और k बराबर plus minus पाँच पर दो। Phase plot: cos और constant के phase शून्य हैं। sin वाले a पाँच का phase minus ninety degree, और a minus पाँच का plus ninety degree.'
+    lines:
+      - 'Magnitude: |a0| = 2 ,  |a±2| = 1/2 ,  |a±5| = 2'
+      - 'Phase:  a0 = 0 ,  a±2 = 0'
+      - 'Phase:  a5 = -90° ,  a-5 = +90°'
+      - 'T|Magnitude plot EVEN, phase plot ODD (sin ke liye)'
+  - head: 'Teri baari! Video pause karo'
+    pause: 8
+    say: 'अब तुम करो। एक: three, plus two cos four pi t, plus sin six pi t, इसका omega zero और coefficients निकालो। दो: cos pi t by two, plus cos pi t by three, का fundamental period निकालो। तीन: पाँच sin three pi t के coefficients.'
+    lines:
+      - 'Q|1)  x(t) = 3 + 2cos(4πt) + sin(6πt)  -> ω0, ak'
+      - 'Q|2)  cos(πt/2) + cos(πt/3)  -> ω0 and T'
+      - 'Q|3)  5 sin(3πt)  -> ak'
+  - head: 'Answers'
+    say: 'जवाब। एक: चार और छह का GCD दो, तो omega zero दो pi। a zero तीन, a plus minus दो बराबर एक, a तीन बराबर minus j बटा दो, a minus तीन बराबर j बटा दो। दो: आधा और एक तिहाई का GCD एक बटा छह, तो omega zero pi बटा छह, T बारह। तीन: omega zero तीन pi, a एक बराबर minus पाँच j बटा दो, a minus एक बराबर पाँच j बटा दो.'
+    lines:
+      - 'A|1)  ω0 = 2π ;  a0=3 ,  a±2 = 1 ,  a3 = -j/2 ,  a-3 = j/2'
+      - 'A|2)  ω0 = π/6 ,  T = 12'
+      - 'A|3)  ω0 = 3π ;  a1 = -5j/2 ,  a-1 = 5j/2'
+      - 'S|Fraction GCD = GCD(numerators) / LCM(denominators)'

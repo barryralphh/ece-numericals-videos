@@ -1,0 +1,50 @@
+title: 'Video 3: Fourier Transform - Pairs and Tricks'
+scenes:
+  - head: 'Yaad rakhne wale 3 pairs'
+    viz: sine
+    freq: 1
+    say: 'Fourier transform में formula से integral करने की ज़रूरत लगभग कभी नहीं पड़ती। बस तीन pairs याद करो। e to the minus a t u of t का transform एक बटा a plus j omega। Amplitude A, चौड़ाई minus T से T वाले rectangle का transform दो A sin omega T बटा omega। और triangle का transform A T गुणा sinc square.'
+    lines:
+      - 'F|e^(-at) u(t)   <->   1 / (a + jω)'
+      - 'F|Rect: A for |t|<T   <->   2A sin(ωT) / ω'
+      - 'F|Triangle: peak A, base -T to T   <->   A·T·[sin(ωT/2)/(ωT/2)]²'
+  - head: 'Triangle solve karo'
+    say: 'Nov 2025 का सवाल: triangular pulse, peak A, base minus T से T। सीधे formula में डालो: X of omega बराबर A T गुणा, sin of omega T by two बटा omega T by two, पूरा square। कोई integral नहीं, दो line में answer!'
+    lines:
+      - 'x(t) = A(1 - |t|/T)  for |t| < T'
+      - 'F|X(ω) = A·T·[ sin(ωT/2) / (ωT/2) ]²'
+      - 'A|X(ω) = A T sinc²(ωT/2)'
+  - head: 'Verify trick (10 second)'
+    say: 'अपना answer verify करने का तरीका: omega बराबर शून्य रखो। X of zero हमेशा signal के नीचे का area होता है। Triangle का area, आधा गुणा base दो T गुणा height A, बराबर A T। हमारे answer में sin x बटा x का limit एक होता है, तो X of zero बराबर A T. Match हो गया, answer सही!'
+    lines:
+      - 'S|Check: X(0) = AREA under x(t)'
+      - 'Triangle area = ½ × 2T × A = A·T'
+      - 'Our answer at ω = 0 :  sinc(0) = 1  ->  A·T'
+      - 'A|Match! Answer sahi hai'
+  - head: 'Shift and Scale tricks'
+    say: 'दो और tricks। Time shift: अगर signal t zero से देर से शुरू हो, तो transform को e to the minus j omega t zero से multiply करो। Scaling: x of a t का transform, एक बटा mod a गुणा X of omega बटा a. इनसे Dec 2023 का सवाल भी हल होता है.'
+    lines:
+      - 'F|x(t - t0)   <->   e^(-jωt0) · X(ω)'
+      - 'F|x(at)   <->   (1/|a|) · X(ω/a)'
+      - 'F|Duality: X(t)   <->   2π x(-ω)'
+  - head: 'Tough one: 1/(1-2jt)'
+    say: 'Tough सवाल: g of t बराबर एक बटा, एक minus दो j t। Duality लगाओ। पहले e to the minus t u of t का transform है एक बटा एक plus j omega। Duality से एक बटा एक plus j t का transform दो pi e to the omega u of minus omega। अब t की जगह minus दो t रखो, scaling से आधा आएगा। Final answer: pi e to the minus omega by two u of omega.'
+    lines:
+      - 'g(t) = 1 / (1 - 2jt)'
+      - 'Step 1: e^(-t)u(t) <-> 1/(1+jω)'
+      - 'Step 2 (duality): 1/(1+jt) <-> 2π e^ω u(-ω)'
+      - 'Step 3 (scale t -> -2t):  × 1/2 ,  ω -> -ω/2'
+      - 'A|G(ω) = π e^(-ω/2) u(ω)'
+  - head: 'Teri baari! Video pause karo'
+    pause: 8
+    say: 'अब तुम करो। एक: e to the minus three t u of t का transform। दो: rectangle amplitude दो, चौड़ाई minus एक से एक। तीन: triangle, A तीन, T दो, और X of zero से verify करो.'
+    lines:
+      - 'Q|1)  e^(-3t) u(t)'
+      - 'Q|2)  Rect amplitude 2, |t| < 1'
+      - 'Q|3)  Triangle A = 3, T = 2   (verify with X(0))'
+  - head: 'Answers'
+    say: 'जवाब। एक: एक बटा तीन plus j omega। दो: दो A sin omega T बटा omega में A दो, T एक, तो चार sin omega बटा omega, और X of zero बराबर चार, area भी दो गुणा दो बराबर चार, match। तीन: A T बराबर छह, तो छह sinc square omega, और area आधा गुणा चार गुणा तीन बराबर छह, match.'
+    lines:
+      - 'A|1)  1 / (3 + jω)'
+      - 'A|2)  4 sin(ω)/ω ,  X(0) = 4 = area 2×2'
+      - 'A|3)  6 sinc²(ω) ,  X(0) = 6 = area ½×4×3'

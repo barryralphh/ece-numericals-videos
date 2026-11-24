@@ -1,0 +1,56 @@
+title: 'Video 1: Periodic Signal - Fundamental Period'
+scenes:
+  - head: 'Question aisa dikhega'
+    viz: sine
+    freq: 2
+    say: 'नमस्ते! आज हम सीखेंगे कि periodic signal का fundamental period कैसे निकालते हैं। एग्ज़ाम में ये सवाल हर बार आता है, पूरे पाँच marks का। सवाल में बस दो शब्द ढूँढो: periodic, और fundamental period.'
+    lines:
+      - 'x[n] = cos(πn/4) + sin(πn/8) + cos(πn/2 + π/6)'
+      - 'Keyword: periodic hai? fundamental period?'
+      - 'S|n likha hai = Discrete,  t likha hai = Continuous'
+  - head: 'Discrete ka formula'
+    say: 'Discrete signal में हर term का omega zero देखो। उसे दो pi गुणा a बटा b की शक्ल में लिखो, fraction lowest form में। फिर period N बराबर b. बस! जैसे pi बटा चार, दो pi गुणा एक बटा आठ के बराबर है, तो N बराबर आठ.'
+    lines:
+      - 'F|ω0 = 2π × (a/b)   ->   N = b'
+      - 'Example: π/4 = 2π × (1/8)   ->   N = 8'
+      - 'T|Fraction lowest terms mein hona chahiye!'
+  - head: 'Har term ka period'
+    say: 'अब हर term का period निकालो। पहला term, pi बटा चार, N आठ। दूसरा, pi बटा आठ, यानी दो pi गुणा एक बटा सोलह, N सोलह। तीसरा, pi बटा दो, यानी दो pi गुणा एक बटा चार, N चार। ध्यान रखो, pi बटा छह वाला phase सिर्फ signal को खिसकाता है, period नहीं बदलता, उसे ignore करो.'
+    lines:
+      - 'cos(πn/4):  π/4 = 2π × 1/8   ->  N1 = 8'
+      - 'sin(πn/8):  π/8 = 2π × 1/16  ->  N2 = 16'
+      - 'cos(πn/2 + π/6):  π/2 = 2π × 1/4  ->  N3 = 4'
+      - 'T|Phase (π/6) ko IGNORE karo - period nahi badalta'
+  - head: 'Ab LCM lagao'
+    say: 'अब तीनों का LCM लो। आठ, सोलह और चार का LCM है सोलह। तो signal periodic है और fundamental period सोलह है। शॉर्टकट: अगर सबसे बड़ा number बाकी सबको divide कर दे, तो वही LCM है। सोलह को आठ और चार दोनों divide करते हैं, तो जवाब सीधा सोलह.'
+    lines:
+      - 'LCM(8, 16, 4) = ?'
+      - 'A|Periodic hai,  N0 = 16'
+      - 'S|Sabse bada number baaki sabko divide kare = wahi LCM'
+  - head: 'Continuous signal'
+    say: 'अब continuous signal। यहाँ formula है T बराबर दो pi बटा omega. cos two pi t by three का period तीन, और sin five pi t by three का period छह बटा पाँच। दोनों का LCM निकालने का शॉर्टकट: numerators का LCM, और denominators का GCD। तीन और छह का LCM छह, एक और पाँच का GCD एक, तो T बराबर छह.'
+    lines:
+      - 'x(t) = cos(2πt/3) + sin(5πt/3)'
+      - 'T = 2π/ω :   T1 = 3/1 ,   T2 = 6/5'
+      - 'S|LCM of fractions = LCM(numerators) / GCD(denominators)'
+      - 'LCM(3, 6) / GCD(1, 5) = 6 / 1'
+      - 'A|T = 6 sec'
+  - head: 'Common traps'
+    say: 'ट्रैप याद रखो। अगर omega zero को दो pi से भाग देने पर irrational number आए, जैसे cos of n, तो signal periodic है ही नहीं। और continuous में अगर T1 बटा T2 irrational हो, तब भी not periodic.'
+    lines:
+      - 'T|cos(n):  ω0 / 2π = 1/2π  irrational  ->  NOT periodic'
+      - 'T|cos(t) + cos(√2 t):  T1/T2 irrational  ->  NOT periodic'
+      - 'S|Ratio T1/T2 fraction hai? Haan -> periodic'
+  - head: 'Teri baari! Video pause karo'
+    pause: 8
+    say: 'अब तुम्हारी बारी। पॉज़ करो और ये तीन हल करो। एक: cos two pi n by five, plus cos three pi n by seven। दो: cos of n by three। तीन: cos pi t, plus sin two pi t by three। अगले slide में जवाब हैं, पहले खुद करो!'
+    lines:
+      - 'Q|1)  cos(2πn/5) + cos(3πn/7)'
+      - 'Q|2)  cos(n/3)'
+      - 'Q|3)  cos(πt) + sin(2πt/3)'
+  - head: 'Answers'
+    say: 'जवाब। एक: पहला term N पाँच, दूसरा term तीन pi बटा सात, दो pi गुणा तीन बटा चौदह, N चौदह। LCM सत्तर। दो: not periodic। तीन: periods दो और तीन, LCM छह. अगर तीनों सही आए, तो अगला video!'
+    lines:
+      - 'A|1)  N = 70   (LCM of 5 and 14)'
+      - 'A|2)  NOT periodic  (irrational)'
+      - 'A|3)  T = 6   (LCM of 2 and 3)'

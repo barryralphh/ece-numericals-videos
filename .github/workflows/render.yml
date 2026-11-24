@@ -1,0 +1,77 @@
+name: Render videos
+
+on:
+  workflow_dispatch:
+    inputs:
+      only:
+        description: 'Comma list of ids e.g. 01,02 (blank = all)'
+        required: false
+        default: ''
+  push:
+    paths:
+      - 'content/**'
+      - 'engine/**'
+      - '.github/workflows/**'
+
+permissions:
+  contents: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        env:
+          ONLY: ${{ github.event.inputs.only }}
+        run: |
+          python3 - <<'EOF' >> $GITHUB_OUTPUT
+          import glob, json, os
+          only = [x.strip() for x in os.environ.get('ONLY', '').split(',') if x.strip()]
+          ids = sorted(os.path.basename(p)[:2] for p in glob.glob('content/[0-9][0-9]-*.yml'))
+          if only:
+              ids = [i for i in ids if i in only]
+          print('matrix=' + json.dumps({'id': ids}))
+          EOF
+
+  render:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pillow edge-tts pyyaml
+      - run: sudo apt-get install -y -qq fonts-dejavu-core
+      - run: python engine/render.py $(ls content/${{ matrix.id }}-*.yml | head -n 1)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ matrix.id }}
+          path: out/*.mp4
+          retention-days: 14
+
+  release:
+    needs: render
+    if: ${{ !cancelled() && needs.render.result != 'skipped' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: video-*
+          merge-multiple: true
+          path: out
+      - name: Publish release (download from phone)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          ls -la out
+          gh release create run-${{ github.run_number }} out/*.mp4 --title 'ECE videos run ${{ github.run_number }}' --notes 'Auto-rendered numericals videos'
